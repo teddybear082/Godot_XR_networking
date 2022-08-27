@@ -1,7 +1,10 @@
 
 This is a minimal working VR networking example using the https://github.com/goatchurchprime/godot_multiplayer_networking_workbench as 
 the basis for connecting using one of the three godot networking protocols (enet, websocket or webrtc) and spawning player avatars 
-into the space on connection.  This works in Godot 3.4.
+into the space on connection.  This works in Godot 3.4 and 3.5.
+
+
+![VirtualDesktop Android-20220827-170419](https://user-images.githubusercontent.com/87204721/187048223-7adf50d8-b845-476a-aee6-d0df5d8888a4.jpg)
 
 
 ## Installation
