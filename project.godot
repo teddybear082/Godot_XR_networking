@@ -268,6 +268,10 @@ config/icon="res://icon.png"
 
 enable_audio_input=true
 
+[display]
+
+window/vsync/use_vsync=false
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/godot-openxr/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/opus/plugin.cfg" )
