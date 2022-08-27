@@ -53,10 +53,10 @@ transform = Transform( 0.9, 0, 0, 0, 1, 0, 0, 0, 0.98, 0, -0.051, 0.085 )
 mesh = SubResource( 3 )
 material = SubResource( 4 )
 
-[node name="ControllerLeft" type="Spatial" parent="."]
+[node name="ControllerLeft" type="Spatial" parent="HeadCam"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.307861, -0.332077, -0.346588 )
 
-[node name="left_quest2_controller" parent="ControllerLeft" instance=ExtResource( 7 )]
+[node name="left_quest2_controller" parent="HeadCam/ControllerLeft" instance=ExtResource( 7 )]
 
 [node name="ControllerRight" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319285, -0.267242, -0.39732 )
