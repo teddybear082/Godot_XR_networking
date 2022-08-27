@@ -85,8 +85,8 @@ func vr_right_button_pressed(button: int):
 														  Vector3(0, 1, 0))
 			$ViewportNetworkGateway.visible = true
 			
-	if button == VR_GRIP:
-		NetworkGateway.get_node("PlayerConnections").LocalPlayer.setpaddlebody(true)
+	#if button == VR_GRIP:
+	#	NetworkGateway.get_node("PlayerConnections").LocalPlayer.setpaddlebody(true)
 
 	if button == VR_BUTTON_4:
 		$FPController/HandtrackingDevelopment.lefthandfingertap()
@@ -94,8 +94,9 @@ func vr_right_button_pressed(button: int):
 		$FPController/TRight_hand.visible = not $FPController/TRight_hand.visible
 
 func vr_right_button_release(button: int):
-	if button == VR_GRIP:
-		NetworkGateway.get_node("PlayerConnections").LocalPlayer.setpaddlebody(false)
+	pass
+#	if button == VR_GRIP:
+#		NetworkGateway.get_node("PlayerConnections").LocalPlayer.setpaddlebody(false)
 
 func vr_left_button_pressed(button: int):
 	print("vr left button pressed ", button)
