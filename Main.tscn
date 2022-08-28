@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://HandtrackingDevelopment.gd" type="Script" id=2]
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/godot-xr-tools/assets/PlayerBody.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/godot-xr-tools/functions/Function_Direct_movement.tscn" type="PackedScene" id=5]
@@ -105,15 +104,12 @@ script = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, -0.05, 0.15 )
 
 [node name="Right_hand" parent="FPController/TRight_hand" instance=ExtResource( 10 )]
-transform = Transform( 2.18557e-08, -0.5, 0.866025, -1, -4.37114e-08, 0, 3.78552e-08, -0.866025, -0.5, 0, 1.75, -0.3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Wrist" parent="FPController/TRight_hand/Right_hand" index="0"]
 script = null
 
 [node name="XRPose" parent="FPController/TRight_hand" instance=ExtResource( 16 )]
-
-[node name="HandtrackingDevelopment" type="Node" parent="FPController"]
-script = ExtResource( 2 )
 
 [node name="Floor" type="StaticBody" parent="."]
 

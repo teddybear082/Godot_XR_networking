@@ -67,7 +67,7 @@ func avatartoframedata():
 				NCONSTANTS2.CFI_VRHANDRIGHT_POSITION: chright.transform.origin, 
 				NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION: chright.transform.basis.get_rotation_quat(),
 
-				NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY: $ControllerRight/PaddleBody.visible
+				#NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY: $ControllerRight/PaddleBody.visible
 			 }
 	return fd
 
@@ -85,9 +85,9 @@ func framedatatoavatar(fd):
 	$HeadCam.transform = overwritetranform($HeadCam.transform, fd.get(NCONSTANTS2.CFI_VRHEAD_ROTATION), fd.get(NCONSTANTS2.CFI_VRHEAD_POSITION))
 	$ControllerLeft.transform = overwritetranform($ControllerLeft.transform, fd.get(NCONSTANTS2.CFI_VRHANDLEFT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDLEFT_POSITION))
 	$ControllerRight.transform = overwritetranform($ControllerRight.transform, fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_POSITION))
-	if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
-		print("remote setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
-		setpaddlebody(fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
+	#if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
+	#	print("remote setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
+	#	setpaddlebody(fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
 		
 var possibleusernames = ["Alice", "Beth", "Cath", "Dan", "Earl", "Fred", "George", "Harry", "Ivan", "John", "Kevin", "Larry", "Martin", "Oliver", "Peter", "Quentin", "Robert", "Samuel", "Thomas", "Ulrik", "Victor", "Wayne", "Xavier", "Youngs", "Zephir"]
 func initavatarlocal():
@@ -117,5 +117,5 @@ static func changethinnedframedatafordoppelganger(fd, doppelnetoffset, isframe0)
 	if fd.has(NCONSTANTS2.CFI_VRORIGIN_ROTATION):
 		fd[NCONSTANTS2.CFI_VRORIGIN_ROTATION] *= Quat(Vector3(0, 1, 0), deg2rad(180))
 
-	if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
-		print("OPP setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
+	#if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
+	#	print("OPP setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])

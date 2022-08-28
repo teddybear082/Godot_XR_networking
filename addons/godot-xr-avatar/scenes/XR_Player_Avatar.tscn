@@ -7985,32 +7985,30 @@ nodes/righthandpose/node = SubResource( 129 )
 nodes/righthandpose/position = Vector2( 1240, 140 )
 nodes/righthandposetrig/node = SubResource( 130 )
 nodes/righthandposetrig/position = Vector2( 1560, 160 )
-node_connections = [ "lefthandpose", 0, "Add2", "lefthandpose", 1, "leftGrip", "righthandpose", 0, "lefthandposetrig", "righthandpose", 1, "rightGrip", "lefthandposetrig", 0, "lefthandpose", "lefthandposetrig", 1, "leftTrigger", "righthandposetrig", 0, "righthandpose", "righthandposetrig", 1, "rightTrigger", "Add2", 0, "Animation", "Add2", 1, "movement", "output", 0, "righthandposetrig" ]
+node_connections = [ "lefthandpose", 0, "Add2", "lefthandpose", 1, "leftGrip", "Add2", 0, "Animation", "Add2", 1, "movement", "righthandposetrig", 0, "righthandpose", "righthandposetrig", 1, "rightTrigger", "lefthandposetrig", 0, "lefthandpose", "lefthandposetrig", 1, "leftTrigger", "righthandpose", 0, "lefthandposetrig", "righthandpose", 1, "rightGrip", "output", 0, "righthandposetrig" ]
 
 [node name="XRPlayerAvatar" type="Spatial" groups=["shadows"]]
 script = ExtResource( 4 )
 
-[node name="FPController" type="Position3D" parent="."]
+[node name="ARVRCamera" type="Position3D" parent="."]
 
-[node name="ARVRCamera" type="Position3D" parent="FPController"]
+[node name="LeftHandController" type="Position3D" parent="."]
 
-[node name="LeftHandController" type="Position3D" parent="FPController"]
+[node name="LeftPhysicsHand" type="Position3D" parent="LeftHandController"]
 
-[node name="LeftPhysicsHand" type="Position3D" parent="FPController/LeftHandController"]
+[node name="RightHandController" type="Position3D" parent="."]
 
-[node name="RightHandController" type="Position3D" parent="FPController"]
+[node name="RightPhysicsHand" type="Position3D" parent="RightHandController"]
 
-[node name="RightPhysicsHand" type="Position3D" parent="FPController/RightHandController"]
-
-[node name="avatar" type="Spatial" parent="FPController"]
+[node name="avatar" type="Spatial" parent="."]
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Armature" type="Spatial" parent="FPController/avatar"]
+[node name="Armature" type="Spatial" parent="avatar"]
 transform = Transform( 1, 0, 0, 0, 1, 1.62921e-07, 0, -1.62921e-07, 1, 0, 0, 0 )
 
-[node name="Skeleton" type="Skeleton" parent="FPController/avatar/Armature"]
+[node name="Skeleton" type="Skeleton" parent="avatar/Armature"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0.125 )
 bones/0/name = "Root"
 bones/0/parent = -1
@@ -8343,81 +8341,81 @@ bones/65/rest = Transform( 1, -3.72529e-08, 3.13134e-06, 3.72529e-08, 1, -2.0489
 bones/65/enabled = true
 bones/65/bound_children = [  ]
 
-[node name="mesh_Body" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Body" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 mesh = SubResource( 88 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 3 )
 
-[node name="mesh_Eyes" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Eyes" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 layers = 131072
 mesh = SubResource( 90 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 2 )
 
-[node name="mesh_Hand_L" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Hand_L" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 mesh = SubResource( 91 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 1 )
 
-[node name="mesh_Hand_R" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Hand_R" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 mesh = SubResource( 92 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 1 )
 
-[node name="mesh_Head" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Head" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 layers = 131072
 mesh = SubResource( 93 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 1 )
 
-[node name="mesh_Visor" type="MeshInstance" parent="FPController/avatar/Armature/Skeleton"]
+[node name="mesh_Visor" type="MeshInstance" parent="avatar/Armature/Skeleton"]
 visible = false
 layers = 131072
 mesh = SubResource( 94 )
 skin = SubResource( 89 )
 material/0 = ExtResource( 3 )
 
-[node name="SkeletonIKL" type="SkeletonIK" parent="FPController/avatar/Armature/Skeleton"]
+[node name="SkeletonIKL" type="SkeletonIK" parent="avatar/Armature/Skeleton"]
 process_priority = 1
 root_bone = "upperarm_l"
 tip_bone = "hand_l"
 use_magnet = true
 magnet = Vector3( 3, -5, -10 )
 
-[node name="SkeletonIKR" type="SkeletonIK" parent="FPController/avatar/Armature/Skeleton"]
+[node name="SkeletonIKR" type="SkeletonIK" parent="avatar/Armature/Skeleton"]
 process_priority = 1
 root_bone = "upperarm_r"
 tip_bone = "hand_r"
 use_magnet = true
 magnet = Vector3( -3, -5, -10 )
 
-[node name="SkeletonIKLegL" type="SkeletonIK" parent="FPController/avatar/Armature/Skeleton"]
+[node name="SkeletonIKLegL" type="SkeletonIK" parent="avatar/Armature/Skeleton"]
 process_priority = 1
 root_bone = "thigh_l"
 tip_bone = "foot_l"
 use_magnet = true
 magnet = Vector3( 0.2, 0, 1 )
 
-[node name="SkeletonIKLegR" type="SkeletonIK" parent="FPController/avatar/Armature/Skeleton"]
+[node name="SkeletonIKLegR" type="SkeletonIK" parent="avatar/Armature/Skeleton"]
 process_priority = 1
 root_bone = "thigh_r"
 tip_bone = "foot_r"
 use_magnet = true
 magnet = Vector3( -0.2, 0, 1 )
 
-[node name="right_foot" type="BoneAttachment" parent="FPController/avatar/Armature/Skeleton"]
+[node name="right_foot" type="BoneAttachment" parent="avatar/Armature/Skeleton"]
 transform = Transform( 0.96255, -0.24293, 0.120308, -0.00337778, -0.454487, -0.890691, 0.271088, 0.857023, -0.438321, -0.103243, 0.071843, 0.0146826 )
 bone_name = "foot_r"
 
-[node name="left_foot" type="BoneAttachment" parent="FPController/avatar/Armature/Skeleton"]
+[node name="left_foot" type="BoneAttachment" parent="avatar/Armature/Skeleton"]
 transform = Transform( 0.962555, 0.242927, -0.120313, 0.00337049, -0.454487, -0.89069, -0.271085, 0.857019, -0.438321, 0.103244, 0.0718506, 0.0146813 )
 bone_name = "foot_l"
 
-[node name="character_height" type="BoneAttachment" parent="FPController/avatar/Armature/Skeleton"]
+[node name="character_height" type="BoneAttachment" parent="avatar/Armature/Skeleton"]
 transform = Transform( 1, 4.38753e-06, 1.88619e-07, -4.49422e-06, 0.999992, 0.00405826, -1.07534e-07, -0.00405829, 0.999992, 8.14329e-06, 1.8453, 0.046462 )
 bone_name = "head_end"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FPController/avatar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="avatar"]
 anims/T-pose = SubResource( 131 )
 anims/backwards = SubResource( 132 )
 anims/forward = SubResource( 133 )
@@ -8441,7 +8439,7 @@ anims/sit_bike = SubResource( 150 )
 anims/sit_car = SubResource( 151 )
 anims/sit_chair = SubResource( 152 )
 
-[node name="AnimationTree" type="AnimationTree" parent="FPController/avatar"]
+[node name="AnimationTree" type="AnimationTree" parent="avatar"]
 tree_root = SubResource( 122 )
 anim_player = NodePath("../AnimationPlayer")
 active = true

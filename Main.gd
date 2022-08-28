@@ -10,25 +10,25 @@ export var QUESTstartupprotocol = "webrtc"
 
 
 func _ready():
-	if OS.has_feature("QUEST"):
-		if has_node("FPController/TRight_hand/Right_hand"):
+	#if OS.has_feature("QUEST"):
+	#	if has_node("FPController/TRight_hand/Right_hand"):
 			#$FPController/TRight_hand/Left_hand.hand = 0  # "Left"
 			#$FPController/TRight_hand/Left_hand.motion_range = 0  # "Unobstructed"
-			$FPController/TRight_hand/Right_hand.hand = 1  # "Right"
+	#		$FPController/TRight_hand/Right_hand.hand = 1  # "Right"
 			#$FPController/TRight_hand/Right_hand.motion_range = 0  # "Unobstructed"
 
 			#$FPController/TLeft_hand/XRPose.action = 0 # "SkeletonBase"
 			#$FPController/TLeft_hand/XRPose.path = 0 # "/user/hand/left"
 			#$FPController/TRight_hand/XRPose.action = 0 # "SkeletonBase"
-			$FPController/TRight_hand/XRPose.path = "/user/hand/right"
+	#		$FPController/TRight_hand/XRPose.path = "/user/hand/right"
 			
-	else:
-		if has_node("FPController/TLeft_hand/Left_hand"):
-			$FPController/TLeft_hand/Left_hand/Wrist.set_process(false)
-			$FPController/TLeft_hand/Left_hand/Wrist.set_physics_process(false)
-		if has_node("FPController/TRight_hand/Right_hand"):
-			$FPController/TRight_hand/Right_hand/Wrist.set_process(false)
-			$FPController/TRight_hand/Right_hand/Wrist.set_physics_process(false)
+	#else:
+	#	if has_node("FPController/TLeft_hand/Left_hand"):
+	#		$FPController/TLeft_hand/Left_hand/Wrist.set_process(false)
+#			$FPController/TLeft_hand/Left_hand/Wrist.set_physics_process(false)
+#		if has_node("FPController/TRight_hand/Right_hand"):
+#			$FPController/TRight_hand/Right_hand/Wrist.set_process(false)
+#			$FPController/TRight_hand/Right_hand/Wrist.set_physics_process(false)
 	#$FPController/LeftHandController/Function_Direct_movement.nonVRkeyboard = true
 
 	if OS.has_feature("QUEST"):
