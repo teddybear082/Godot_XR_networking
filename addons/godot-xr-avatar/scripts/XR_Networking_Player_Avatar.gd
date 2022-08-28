@@ -266,7 +266,12 @@ func avatartoframedata():
 				NCONSTANTS2.CFI_VRHANDLEFT_ROTATION: left_hand.transform.basis.get_rotation_quat(), 
 				NCONSTANTS2.CFI_VRHANDRIGHT_POSITION: right_hand.transform.origin, 
 				NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION: right_hand.transform.basis.get_rotation_quat(),
-
+				NCONSTANTS2.CFI_VRHANDLEFT_POSE: Vector2($avatar/AnimationTree.get("parameters/lefthandpose/blend_amount"), 
+														 $avatar/AnimationTree.get("parameters/lefthandposetrig/blend_amount")),
+				NCONSTANTS2.CFI_VRHANDRIGHT_POSE: Vector2($avatar/AnimationTree.get("parameters/righthandpose/blend_amount"), 
+														  $avatar/AnimationTree.get("parameters/righthandposetrig/blend_amount")),
+				NCONSTANTS2.CFI_AVATAR_POSE: $avatar/AnimationTree.get("parameters/movement/blend_position"),
+				NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT: $avatar/AnimationTree.get("parameters/Add2/add_amount"),
 				#NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY: $ControllerRight/PaddleBody.visible
 			 }
 	return fd
@@ -287,6 +292,16 @@ func framedatatoavatar(fd):
 	right_controller.transform = overwritetranform(right_controller.transform, fd.get(NCONSTANTS2.CFI_VRCONTROLLERRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRCONTROLLERRIGHT_POSITION))
 	left_hand.transform = overwritetranform(left_hand.transform, fd.get(NCONSTANTS2.CFI_VRHANDLEFT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDLEFT_POSITION))
 	right_hand.transform = overwritetranform(right_hand.transform, fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_POSITION))	
+	if fd.has(NCONSTANTS2.CFI_VRHANDLEFT_POSE):
+		$avatar/AnimationTree.set("parameters/lefthandpose/blend_amount", fd[NCONSTANTS2.CFI_VRHANDLEFT_POSE].x) 
+		$avatar/AnimationTree.set("parameters/lefthandposetrig/blend_amount", fd[NCONSTANTS2.CFI_VRHANDLEFT_POSE].y) 
+	if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_POSE):
+		$avatar/AnimationTree.set("parameters/righthandpose/blend_amount", fd[NCONSTANTS2.CFI_VRHANDRIGHT_POSE].x) 
+		$avatar/AnimationTree.set("parameters/righthandposetrig/blend_amount", fd[NCONSTANTS2.CFI_VRHANDRIGHT_POSE].y) 
+	if fd.has(NCONSTANTS2.CFI_AVATAR_POSE):
+		$avatar/AnimationTree.set("parameters/movement/blend_position", fd[NCONSTANTS2.CFI_AVATAR_POSE])
+	if fd.has(NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT):
+		$avatar/AnimationTree.set("parameters/Add2/add_amount", fd[NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT])
 	#if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
 	#	print("remote setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
 	#	setpaddlebody(fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
