@@ -104,7 +104,6 @@ script = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, -0.05, 0.15 )
 
 [node name="Right_hand" parent="FPController/TRight_hand" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Wrist" parent="FPController/TRight_hand/Right_hand" index="0"]
 script = null

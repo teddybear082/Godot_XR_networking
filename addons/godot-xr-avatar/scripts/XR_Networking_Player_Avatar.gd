@@ -286,7 +286,7 @@ func framedatatoavatar(fd):
 	left_controller.transform = overwritetranform(left_controller.transform, fd.get(NCONSTANTS2.CFI_VRCONTROLLERLEFT_ROTATION), fd.get(NCONSTANTS2.CFI_VRCONTROLLERLEFT_POSITION))
 	right_controller.transform = overwritetranform(right_controller.transform, fd.get(NCONSTANTS2.CFI_VRCONTROLLERRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRCONTROLLERRIGHT_POSITION))
 	left_hand.transform = overwritetranform(left_hand.transform, fd.get(NCONSTANTS2.CFI_VRHANDLEFT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDLEFT_POSITION))
-	right_hand.transform = overwritetranform(right_controller.transform, fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_POSITION))	
+	right_hand.transform = overwritetranform(right_hand.transform, fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_ROTATION), fd.get(NCONSTANTS2.CFI_VRHANDRIGHT_POSITION))	
 	#if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
 	#	print("remote setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
 	#	setpaddlebody(fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
@@ -311,9 +311,9 @@ func avatarinitdata():
 func processlocalavatarposition(delta):
 	#update transforms
 	transform = get_arvr_origin_transform()
+	arvrcamera.transform = get_arvr_camera_transform()
 	left_controller.transform = get_left_controller_transform()
 	right_controller.transform = get_right_controller_transform()
-	arvrcamera.transform = get_arvr_camera_transform()
 	left_hand.transform = get_left_hand_transform()
 	right_hand.transform = get_right_hand_transform()
 	
