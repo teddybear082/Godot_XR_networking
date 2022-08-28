@@ -56,7 +56,7 @@ var heartbeatfullframeseconds = 5.0
 var minframeseconds = 0.1
 
 var framedata0 = { NCONSTANTS.CFI_TIMESTAMP:0.0, NCONSTANTS.CFI_TIMESTAMP_F0:0.0 }
-func _process(delta):
+func _physics_process(delta):
 	get_parent().processlocalavatarposition(delta)
 
 	var tstamp = OS.get_ticks_msec()*0.001
