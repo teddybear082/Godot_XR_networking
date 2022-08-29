@@ -67,6 +67,7 @@ uv1_scale = Vector3( 10, 20, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
+webrtcroomname = "xravatar"
 
 [node name="FPController" parent="." instance=ExtResource( 3 )]
 
