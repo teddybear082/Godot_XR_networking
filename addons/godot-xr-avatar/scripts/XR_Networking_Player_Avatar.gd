@@ -270,19 +270,21 @@ func avatartoframedata():
 														 $avatar/AnimationTree.get("parameters/lefthandposetrig/blend_amount")),
 				NCONSTANTS2.CFI_VRHANDRIGHT_POSE: Vector2($avatar/AnimationTree.get("parameters/righthandpose/blend_amount"), 
 														  $avatar/AnimationTree.get("parameters/righthandposetrig/blend_amount")),
-				NCONSTANTS2.CFI_AVATAR_POSE: $avatar/AnimationTree.get("parameters/movement/blend_position"),
-				NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT: $avatar/AnimationTree.get("parameters/Add2/add_amount"),
-				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_POSITION: left_target.transform.origin,
-				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_ROTATION: left_target.transform.basis.get_rotation_quat(),
-				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_POSITION: right_target.transform.origin,
-				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_ROTATION: right_target.transform.basis.get_rotation_quat(),
 				NCONSTANTS2.CFI_AVATAR_POSITION: $avatar.transform.origin,
 				NCONSTANTS2.CFI_AVATAR_ROTATION: $avatar.transform.basis.get_rotation_quat(),
 				NCONSTANTS2.CFI_AVATAR_ARMATURE_POSITION: $avatar/Armature.transform.origin,
 				NCONSTANTS2.CFI_AVATAR_ARMATURE_ROTATION: $avatar/Armature.transform.basis.get_rotation_quat(),
+				NCONSTANTS2.CFI_AVATAR_SCALE: armature_scale,
+				NCONSTANTS2.CFI_SKELETON_Y: skeleton.transform.origin.y,
 				NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION: skeleton.get_bone_pose(skeleton.find_bone("head")).origin,
-				NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION: skeleton.get_bone_pose(skeleton.find_bone("head")).basis.get_rotation_quat()
-				
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION: skeleton.get_bone_pose(skeleton.find_bone("head")).basis.get_rotation_quat(),
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_POSITION: left_target.transform.origin,
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_ROTATION: left_target.transform.basis.get_rotation_quat(),
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_POSITION: right_target.transform.origin,
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_ROTATION: right_target.transform.basis.get_rotation_quat(),
+				NCONSTANTS2.CFI_AVATAR_POSE: $avatar/AnimationTree.get("parameters/movement/blend_position"),
+				NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT: $avatar/AnimationTree.get("parameters/Add2/add_amount")
+								
 			 }
 	return fd
 
@@ -308,15 +310,21 @@ func framedatatoavatar(fd):
 	if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_POSE):
 		$avatar/AnimationTree.set("parameters/righthandpose/blend_amount", fd[NCONSTANTS2.CFI_VRHANDRIGHT_POSE].x) 
 		$avatar/AnimationTree.set("parameters/righthandposetrig/blend_amount", fd[NCONSTANTS2.CFI_VRHANDRIGHT_POSE].y) 
+	$avatar.transform = overwritetranform($avatar.transform, fd.get(NCONSTANTS2.CFI_AVATAR_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_POSITION))
+	$avatar/Armature.transform = overwritetranform($avatar/Armature.transform, fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_POSITION))
+	if fd.has(NCONSTANTS2.CFI_AVATAR_SCALE):
+		$avatar/Armature.global_scale(fd[NCONSTANTS2.CFI_AVATAR_SCALE])
+	if fd.has(NCONSTANTS2.CFI_SKELETON_Y):
+		skeleton.transform.origin.y = fd[NCONSTANTS2.CFI_SKELETON_Y]
+	skeleton.set_bone_pose(skeleton.find_bone("head"), overwritetranform(skeleton.get_bone_pose(skeleton.find_bone("head")), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION)))
+	left_target.transform = overwritetranform(left_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_POSITION))
+	right_target.transform = overwritetranform(right_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_POSITION))
 	if fd.has(NCONSTANTS2.CFI_AVATAR_POSE):
 		$avatar/AnimationTree.set("parameters/movement/blend_position", fd[NCONSTANTS2.CFI_AVATAR_POSE])
 	if fd.has(NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT):
 		$avatar/AnimationTree.set("parameters/Add2/add_amount", fd[NCONSTANTS2.CFI_AVATAR_ADD_AMOUNT])
-	$avatar.transform = overwritetranform($avatar.transform, fd.get(NCONSTANTS2.CFI_AVATAR_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_POSITION))
-	$avatar/Armature.transform = overwritetranform($avatar/Armature.transform, fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_POSITION))
-	left_target.transform = overwritetranform(left_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_POSITION))
-	right_target.transform = overwritetranform(right_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_POSITION))
-	skeleton.set_bone_pose(skeleton.find_bone("head"), overwritetranform(skeleton.get_bone_pose(skeleton.find_bone("head")), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION)))
+	
+	
 	#if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION):
 		#Raycast_L.transform.origin = fd[NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION]
 	#if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION):
