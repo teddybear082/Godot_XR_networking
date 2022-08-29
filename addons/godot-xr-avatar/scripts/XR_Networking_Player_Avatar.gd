@@ -280,8 +280,8 @@ func avatartoframedata():
 				NCONSTANTS2.CFI_AVATAR_ROTATION: $avatar.transform.basis.get_rotation_quat(),
 				NCONSTANTS2.CFI_AVATAR_ARMATURE_POSITION: $avatar/Armature.transform.origin,
 				NCONSTANTS2.CFI_AVATAR_ARMATURE_ROTATION: $avatar/Armature.transform.basis.get_rotation_quat(),
-				NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION: Raycast_L.transform.origin,
-				NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION: Raycast_R.transform.origin
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION: skeleton.get_bone_pose(skeleton.find_bone("head")).origin,
+				NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION: skeleton.get_bone_pose(skeleton.find_bone("head")).basis.get_rotation_quat()
 				
 			 }
 	return fd
@@ -316,12 +316,11 @@ func framedatatoavatar(fd):
 	$avatar/Armature.transform = overwritetranform($avatar/Armature.transform, fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_ARMATURE_POSITION))
 	left_target.transform = overwritetranform(left_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGL_TARGET_POSITION))
 	right_target.transform = overwritetranform(right_target.transform, fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKLEGR_TARGET_POSITION))
-	#if fd.has(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION):
-	#	skeleton.set_bone_pose(skeleton.find_bone("head"), overwritetranform(skeleton.get_bone_pose(skeleton.find_bone("head")), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION)))
-	if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION):
-		Raycast_L.transform.origin = fd[NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION]
-	if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION):
-		Raycast_R.transform.origin = fd[NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION]
+	skeleton.set_bone_pose(skeleton.find_bone("head"), overwritetranform(skeleton.get_bone_pose(skeleton.find_bone("head")), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_ROTATION), fd.get(NCONSTANTS2.CFI_AVATAR_SKELETONIKHEAD_POSE_POSITION)))
+	#if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION):
+		#Raycast_L.transform.origin = fd[NCONSTANTS2.CFI_AVATAR_RAYCASTL_POSITION]
+	#if fd.has(NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION):
+	#	Raycast_R.transform.origin = fd[NCONSTANTS2.CFI_AVATAR_RAYCASTR_POSITION]
 	
 	#if fd.has(NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY):
 	#	print("remote setpaddlebody ", fd[NCONSTANTS2.CFI_VRHANDRIGHT_PADDLEBODY])
